@@ -4,93 +4,50 @@
 #include <map>
 #include <queue>
 #include <algorithm>
+#include <string>
 using namespace std;
 
-const int MAX = 51;
-int M, N, K;
+const int MAX=51;
+string cal;
+char opt[MAX];
+int num[MAX]={0};
 
-int dx[] = { 0, -1, 0, 1 };
-int dy[] = { -1, 0, 1, 0 };
-
-int chu[MAX][MAX] = { 0 };
-
-queue<pair<int, int>> q;
-
-bool isInside(int x, int y);
-void bfs(int x, int y);
-bool isChecked[MAX][MAX];
-//void test(int chu[][MAX]);
-
-int cnt = 0;
+bool isMinus;
 
 int main() {
-    int T; // Å×½ºÆ® ÄÉÀÌ½ºÀÇ °³¼ö
-    cin >> T;
+    getline(cin, cal); // ì‹
+    
+    int num_idx=0, opt_idx=0, ans=0;
+    isMinus=false;
 
-
-
-    while (T--) {//Å×½ºÆ® ÄÉÀÌ½º
-        cin >> M >> N >> K; // ¹èÃß¹çÀÇ °¡·Î ±æÀÌ, ¼¼·Î±æÀÌ, ¹èÃß°¡ ½É¾îÁ® ÀÖ´Â À§Ä¡ÀÇ °³¼ö
-        int x, y;
-
-        while (K--) {
-            cin >> y >> x;
-            chu[x][y] = 1; // ¹èÃß°¡ ½É¾îÁü
+    for(int i=0;i<cal.length();i++){
+        if(cal[i]!='-' || cal[i]!='+'){
+            // -ë‚˜ +ì—°ì‚°ìžê°€ ì•„ë‹ ë™ì•ˆ,
+            num[num_idx] = num[num_idx]*10 + cal[i] - '0';
         }
-        //test(chu);
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                if (!isChecked[i][j] && chu[i][j] == 1) {
-                    cnt++; // ¹èÃß ¸ðÀÓ ¼ö
-                    bfs(i, j);
-                }
-            }
-        }
-
-        cout << cnt << '\n';
-        cnt = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                isChecked[i][j] = false;
-                chu[i][j] = 0;
+        else{
+            num_idx++;
+            if(cal[i]=='-'){
+                opt[opt_idx] = cal[i];
+                opt_idx++;
             }
         }
     }
 
+    ans += num[0];
 
 
+    for(int i=0;i<opt_idx;i++){
+        if(opt[i]=='-'){
+            isMinus=true;
+        }
+        if(isMinus){
+            ans -= num[i+1];
+        }
+        else{
+            ans += num[i+1];
+        }
+    }
+    cout << ans;
     return 0;
-}
-
-void bfs(int x, int y) {
-    q.push({ x, y });
-    isChecked[x][y] = true;
-    int xx, yy;
-    while (!q.empty()) {
-        xx = q.front().first;
-        yy = q.front().second;
-        q.pop();
-
-        for (int i = 0; i < 4; i++) {
-            int nx = xx + dx[i];
-            int ny = yy + dy[i];
-            if (isInside(nx, ny) && !isChecked[nx][ny] && chu[nx][ny] == 1) {
-                q.push({ nx, ny });
-                isChecked[nx][ny] = true;
-            }
-        }
-    }
-}
-
-
-bool isInside(int x, int y) {
-    return 0 <= x && x < N && 0 <= y && y < M;
-}
-
-void test(int chu[][MAX]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            printf("%2d ", chu[i][j]);
-        }printf("\n");
-    }printf("------------------------------------------\n");
 }
