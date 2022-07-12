@@ -16,6 +16,7 @@ int stu[STU_MAX] = { 0 };
 int due[STU_MAX] = { 0 };
 
 bool compare(int a, int b);
+int isEmpty();
 void PICprint();
 void STUprint();
 void S();
@@ -23,49 +24,53 @@ void S();
 int main() {
     cin >> N; // 사진틀의 개수
     cin >> rec; // 학생들의 총 추천 횟수
-    for (int i = 0; i < N; i++) {
-        cin >> pic[i];
-        stu[pic[i]-1] = 1;
-        for (int j = 0; j <= i; j++) {
-            due[pic[j]-1]++;
-        }
-    }
-    S();
-    //STUprint();
-    //PICprint();
-    for (int i = N; i < rec; i++) {
-        int num;
-        cin >> num; // 학생 번호 입력 받기
-        //printf("전: ");
-        if (stu[num-1] == 0) {
-            // 사진틀에 존재하지 않는 학생 신규 추천
-            stu[pic[N - 1] - 1] = 0;
-            due[pic[N - 1] - 1] = 0;
-            pic[N - 1] = num;
-            stu[num - 1] = 1;
 
-            for (int j = 0; j < N; j++) {
-                due[pic[j] - 1]++;
+    for (int i = 0; i < rec; i++) {
+        int c = isEmpty();
+        if (c != -1) {
+            // 빈 사진틀이 있는 경우
+            cin >> pic[c];
+            stu[pic[c] - 1] = 1;
+            for (int k = 0; k <= i; k++) {
+                due[pic[k] - 1]++;
             }
-            
-            //print();
-
-
-            //STUprint();
-            //PICprint(); printf("------------------------\n\n");
             S();
-            
         }
         else {
-            //사진 틀에 이미 존재하는 학생 또 추천
-            stu[num-1]++;
+            int num;
+            cin >> num; // 학생 번호 입력 받기
+            //printf("전: ");
+            if (stu[num - 1] == 0) {
+                // 사진틀에 존재하지 않는 학생 신규 추천
+                stu[pic[N - 1] - 1] = 0;
+                due[pic[N - 1] - 1] = 0;
+                pic[N - 1] = num;
+                stu[num - 1] = 1;
 
-            for (int j = 0; j < N; j++) {
-                due[pic[j] - 1]++;
+                for (int j = 0; j < N; j++) {
+                    due[pic[j] - 1]++;
+                }
+
+                //print();
+
+
+                //STUprint();
+                //PICprint(); printf("------------------------\n\n");
+                S();
+
+            }
+            else {
+                //사진 틀에 이미 존재하는 학생 또 추천
+                stu[num - 1]++;
+
+                for (int j = 0; j < N; j++) {
+                    due[pic[j] - 1]++;
+                }
+
+                S();
+
             }
 
-            S();
-            
         }
         //STUprint();
         //PICprint();
@@ -73,6 +78,7 @@ int main() {
 
     sort(pic, pic + N, compare);
     for (int i = 0; i < N; i++) {
+        if (pic[i] == 0)continue;
         cout << pic[i] << " ";
     }
     return 0;
@@ -112,4 +118,13 @@ void S() {
             }
         }
     }
+}
+
+int isEmpty() {
+    for (int j = 0; j < N; j++) {
+        if (pic[j] == 0) {
+            return j;
+        }
+    }
+        return -1;
 }
