@@ -15,24 +15,32 @@ int num[MAX]={0};
 bool isMinus;
 
 int main() {
-    getline(cin, cal); // 식
+    cin >> cal; // 식
+    //cout << cal << endl;
     
     int num_idx=0, opt_idx=0, ans=0;
     isMinus=false;
 
-    for(int i=0;i<cal.length();i++){
-        if(cal[i]!='-' || cal[i]!='+'){
-            // -나 +연산자가 아닐 동안,
-            num[num_idx] = num[num_idx]*10 + cal[i] - '0';
-        }
-        else{
+    for(int i=0;i<cal.length()+1;i++){
+        //printf("cal[%d]: %c \n", i, cal[i]);
+        if (cal[i] == '-' || cal[i] == '+' ) {
+            opt[opt_idx] = cal[i];
             num_idx++;
-            if(cal[i]=='-'){
-                opt[opt_idx] = cal[i];
-                opt_idx++;
-            }
+            opt_idx++;
+        }
+        else if (cal[i] == '\0') {
+            num_idx++;
+        } 
+        else{
+            num[num_idx] = num[num_idx] * 10 + (cal[i] - '0');
         }
     }
+
+    
+    //for (int i = 0; i < num_idx; i++) {
+    //    printf("num: %d\n\n", num[i]);
+    //}
+    //cout << num_idx << endl;
 
     ans += num[0];
 
