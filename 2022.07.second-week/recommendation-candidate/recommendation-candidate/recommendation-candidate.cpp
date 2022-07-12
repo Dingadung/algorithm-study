@@ -26,20 +26,27 @@ int main() {
     cin >> rec; // 학생들의 총 추천 횟수
 
     for (int i = 0; i < rec; i++) {
+        int num;
+        cin >> num; // 학생번호 입력받기
         int c = isEmpty();
         if (c != -1) {
             // 빈 사진틀이 있는 경우
-            cin >> pic[c];
-            stu[pic[c] - 1] = 1;
-            for (int k = 0; k <= i; k++) {
-                due[pic[k] - 1]++;
+            if (stu[num - 1] == 0) {
+                pic[c] = num;
+                stu[pic[c] - 1] = 1;
+                for (int k = 0; k <= i; k++) {
+                    due[pic[k] - 1]++;
+                }
+            }
+            else {
+                stu[num - 1]++;
+                for (int k = 0; k <= i; k++) {
+                    due[pic[k] - 1]++;
+                }
             }
             S();
         }
         else {
-            int num;
-            cin >> num; // 학생 번호 입력 받기
-            //printf("전: ");
             if (stu[num - 1] == 0) {
                 // 사진틀에 존재하지 않는 학생 신규 추천
                 stu[pic[N - 1] - 1] = 0;
@@ -50,12 +57,6 @@ int main() {
                 for (int j = 0; j < N; j++) {
                     due[pic[j] - 1]++;
                 }
-
-                //print();
-
-
-                //STUprint();
-                //PICprint(); printf("------------------------\n\n");
                 S();
 
             }
@@ -72,8 +73,6 @@ int main() {
             }
 
         }
-        //STUprint();
-        //PICprint();
     }
 
     sort(pic, pic + N, compare);
@@ -108,13 +107,9 @@ void S() {
     for (int j = 0; j < N - 1; j++) {
         for (int k = 0; k < N - 1; k++) {
             if ((stu[pic[k] - 1] < stu[pic[k + 1] - 1]) || (stu[pic[k] - 1] == stu[pic[k + 1] - 1] && due[pic[k] - 1] > due[pic[k + 1] - 1])) {
-                //printf("pic[%d]: %d, pic[%d]: %d\n\n", k, pic[k], k + 1, pic[k + 1]);
                 int t = pic[k];
                 pic[k] = pic[k + 1];
                 pic[k + 1] = t;
-
-                //STUprint();
-               // PICprint();printf("------------------------\n\n");
             }
         }
     }
