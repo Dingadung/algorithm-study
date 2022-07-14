@@ -2,9 +2,12 @@
 #include<string>
 #include<vector>
 using namespace std;
+string pattern;
+string text;
+int N, M;
+string S;
 
-
-vector<int> Fail(string pattern) {
+vector<int> Fail() {
 	int m = pattern.length();
 	vector<int> pi(m); // 모든 원소가 0으로 초기화된 상태에서 시작한다.
 	pi[0] = 0;
@@ -19,11 +22,11 @@ vector<int> Fail(string pattern) {
 	return pi;
 }
 
-vector<int> KMP(string pattern, string text) {
+int KMP() {
 	int m = pattern.length();
 	int n = pattern.length();
-	vector<int> pos;
-	vector<int> pi = Fail(pattern);
+	int ans = 0;
+	vector<int> pi = Fail();
 
 	for (int i = 0, j = 0; i < n; i++) {
 		while (j > 0 && text[i] != pattern[j]) {
@@ -31,7 +34,7 @@ vector<int> KMP(string pattern, string text) {
 		}
 		if (text[i] == pattern[j]) {
 			if (j == m - 1) {
-				pos.push_back(i - m + 1);
+				ans++;
 				j = pi[j];
 			}
 			else {
@@ -39,11 +42,25 @@ vector<int> KMP(string pattern, string text) {
 			}
 		}
 	}
-	return pos;
+	return ans;
 }
 
 
 int main() {
-	
+	cin >> N;
+	cin >> M;
+	cin>> S;
+
+	for (int i = 0; i < 2 * N + 1; i++) {
+		if (i % 2 == 0) {
+			pattern.push_back('I');
+		}
+		else {
+			pattern.push_back('O');
+		}
+	}
+
+	int cnt = KMP();
+	cout << cnt;
 	return 0;
 }
