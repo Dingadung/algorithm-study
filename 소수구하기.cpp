@@ -26,16 +26,11 @@ int main() {
         }
     }
 
-    arr[2] = 0;
 
     for(int i=M;i<=N;i++) {
         if(arr[i] != 0)
             printf("%d\n", arr[i]);
     }
 
-    // for (int i=0;i<=N;i++) {
-    //     printf("%d ", arr[i]);
-    //     if(i!=0 && i%5==0) printf("\n");
-    // }
     return 0;
 }
