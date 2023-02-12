@@ -22,19 +22,19 @@ N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로�
 
 using namespace std;
 
-vector<unsigned long> v;
+vector<int> v;
 int main(){
-    unsigned long N;
+    int N;
     cin >> N;
-    for(unsigned long i=0;i<N;i++) {
-        unsigned long e;
+    for(int i=0;i<N;i++) {
+        int e;
         cin >> e;
         v.push_back(e);
     }
     sort(v.begin(), v.end());
     
-    for(unsigned long i=0;i<N;i++) {
-        cout << v[i];
+    for(int i=0;i<N;i++) {
+        cout << v[i] << "\n";
     }
     return 0;
 }
