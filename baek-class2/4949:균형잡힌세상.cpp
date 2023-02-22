@@ -1,31 +1,24 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
-#include <math.h>
 #include <string>
 #include <stack>
 
 using namespace std;
 
-
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-
     while(true) {
         string s;
         getline(cin, s);
         if(s == ".") break;
 
-        bool check=true;
         stack<char> bal;
+        bool check=true;
         
-        for(int i =0; i<s.length();i++) {
+        for (int i = 0; i < s.length(); i++) {
             char e = s[i];
             if(e == '(' || e == '[') {
                 bal.push(e);
             }
-            else if(s[i] == ')') {
+            else if(e == ')') {
                 if(!bal.empty() && bal.top() == '(') {
                     // balance ok
                     bal.pop();
@@ -35,8 +28,8 @@ int main(){
                     break;
                 }
             }
-            else if(s[i] == ']') {
-                if(!bal.empty() && bal.top() != '[') {
+            else if(e == ']') {
+                if(!bal.empty() && bal.top() == '[') {
                     // balance ok
                     bal.pop();
                 }
