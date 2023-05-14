@@ -1,12 +1,15 @@
-class Dog:
-    def __init__(self, name, type, gender):
+class Dog:  # 클래스 선언
+    def __init__(self, name, age, breed, weight):
         self.name = name
-        self.type = type
-        self.gender = gender
+        self.age = age
+        self.breed = breed
+        self.weight = weight
+
+    def eat(self, food):
+        self.weight += food
+        return self.weight
+
+    def bark(self):  # 메소드 선언
+        print(self.name + "가 멍멍하고 짖는다.")
 
 
-p1 = Dog("John", "리트리버", "male")
-
-print(p1.name)
-print(p1.type)
-print(p1.gender)
