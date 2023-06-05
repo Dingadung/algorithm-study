@@ -9,11 +9,10 @@ that are greater than or equal to 1 are 2,6, and 18.
 def Func(a, b):
     if a < b:
         return 0
-    if 18 % b == 0 and b % 2 == 0:
+    if a % b == 0 and b % 2 == 0:
         print(b)
-        return Func(a, b+1)
-    else:
-        return Func(a, b+1)
+    return Func(a, b+1)
+
 
 
 Func(18, 1)

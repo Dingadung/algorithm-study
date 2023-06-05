@@ -11,4 +11,4 @@ def fibonacci(val):
     return fibonacci(val-1) + fibonacci(val-2)
 
 
-print(fibonacci(3))
+print(fibonacci(5))

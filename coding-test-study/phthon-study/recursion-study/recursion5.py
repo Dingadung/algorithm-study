@@ -12,7 +12,7 @@ def Func(n):
     if n % 2 == 0:
         return n + Func(n - 1)
     else:
-        return 0 + Func(n - 1)
+        return Func(n - 1)
 
 
 n = int(input())

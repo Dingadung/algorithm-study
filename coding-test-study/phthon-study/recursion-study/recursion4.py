@@ -5,9 +5,12 @@ abcd => dcba
 
 
 def reverse(str):
-    if len(str) == 1:
+    if len(str) == 0:
         return str
-    return reverse(str[1:]) + str[0]
+    length = len(str)-1
+    print(str[length], end='')
+
+    return reverse(str[:length])
 
 
-print(reverse("abcd"))
+reverse("abcd")
