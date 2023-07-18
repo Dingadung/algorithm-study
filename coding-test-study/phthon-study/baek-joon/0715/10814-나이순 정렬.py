@@ -26,3 +26,11 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
+people = []
+for _ in range(N):
+    age, name = input().split()
+    person = (int(age), name)
+    people.append(person)
+people = sorted(people, key = lambda x : (x[0]))
+for p in people:
+    print(p[0],p[1])
