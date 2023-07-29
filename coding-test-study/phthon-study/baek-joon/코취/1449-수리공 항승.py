@@ -22,13 +22,15 @@ N과 L은 1,000보다 작거나 같은 자연수이고, 물이 새는 곳의 위
 1 2 100 101 -> 2
 '''
 N, L = map(int, input().split())  # 물이 새는 곳의 개수 N, 테이프의 길이 L
-point = [0 for i in range(1, 1001)]
-fix = list(map(int, input().split()))
-for f in fix:
-    point[f] = 1
+pipes = list(map(int, input().split()))
+pipes.sort()
+endpoint = 0
+cnt = 0
 
-while True:
-    tmp = L
-    while 
+for curr in pipes:
+    if curr > endpoint:
+        cnt += 1
+        endpoint = curr - 0.5 + L
 
-print(point)
+
+print(cnt)
