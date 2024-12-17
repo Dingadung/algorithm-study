@@ -29,7 +29,7 @@ typedef enum label {
     VISITED,  // 방문한 상태
     TREE,     // 트리 간선
     BACK      // 역방향 간선
-} LABEL;
+} LABEL;023
 
 // 간선을 나타내는 구조체
 typedef struct s_edge {

@@ -28,7 +28,7 @@ void addEdge(int v1, int v2) {
 int main() {
     int m, s; // 간선의 개수, 시작 정점
     scanf("%d %d %d", &n, &m, &s);
-
+    m = n-1;
     for (int i = 0; i < m; i++) {
         int v1, v2;
         scanf("%d %d", &v1, &v2);
