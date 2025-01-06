@@ -25,7 +25,7 @@ for i in range(1, N):
     tmp = i + sum_digit(i)
     if N == tmp:
         ans = min(ans, i)
-
+        break
 if ans == N:
     ans = 0
 
